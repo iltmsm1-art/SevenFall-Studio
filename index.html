@@ -687,6 +687,51 @@
     .score-row { grid-template-columns: 130px 35px 1fr; }
     .mini { width:24px;height:24px; } .mini img { width:24px;height:24px; }
   }
+
+
+  /* Mobile/tablet layout repair: keeps the phone from using the desktop two-column grid. */
+  @media (max-width:1200px) {
+    .wrap { max-width:100%; padding:8px; }
+    .sheet { padding:10px; overflow:hidden; }
+    header, .brand-area, .main, .rules, .footer {
+      display:grid;
+      grid-template-columns:1fr !important;
+      width:100%;
+    }
+    .components {
+      border-left:0;
+      padding-left:0;
+      border-top:1.5px solid #e07a23;
+      padding-top:14px;
+    }
+    .brand-can img { max-width:180px; max-height:240px; }
+    .brand-copy h1, h1 { font-size:36px; text-align:center; }
+    .subtitle, .tag, .statsline { justify-content:center; text-align:center; }
+    .main { gap:8px; margin-top:12px; }
+    .panel, .scorecard { width:100%; margin-bottom:12px; }
+    .rules { gap:8px; }
+    .rule {
+      min-height:0;
+      border-left:0;
+      border-top:1.5px solid #e07a23;
+      padding:10px 4px 4px;
+    }
+    .score-row { grid-template-columns:120px 34px 1fr; }
+    .score-text-row b { font-size:22px; }
+    .symbol-preview-grid { grid-template-columns:repeat(3,1fr); }
+    .session-grid, .daily-grid { grid-template-columns:1fr 1fr; }
+  }
+
+  @media (max-width:600px) {
+    .section-title { font-size:22px; }
+    .controls { position:static; }
+    .controls button, .controls select { min-height:46px; font-size:14px; }
+    .controls button { flex:1 1 100%; }
+    .fate { flex-wrap:wrap; overflow-x:hidden; gap:10px; padding:12px 8px; }
+    .tile, .tile img { width:68px; height:68px; }
+    .tile .name { font-size:9px; bottom:-17px; }
+  }
+
 </style>
 </head>
 <body>
