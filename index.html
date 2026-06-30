@@ -3,22 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SevenFall Studio Edition</title>
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0b0b0b">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="SevenFall">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-
-<!-- SevenFall Analytics: replace G-71VGQ7H6G4 with your Google Analytics 4 Measurement ID before publishing. -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-71VGQ7H6G4"></script>
+<title>SevenFall Studio Edition v1.3 Sprint 1.1</title>
+<!-- SevenFall Analytics: replace G-XXXXXXXXXX with your Google Analytics 4 Measurement ID before publishing. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
   gtag('js', new Date());
-  gtag('config', 'G-71VGQ7H6G4', { send_page_view: true });
+  gtag('config', 'G-XXXXXXXXXX', { send_page_view: true });
 </script>
 
 <style>
@@ -640,6 +632,54 @@
   }
 
 
+  .phase-indicator {
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:8px 0 12px;
+    font-family:Arial,sans-serif;
+  }
+  .phase-step {
+    border:1px solid #c9952f;
+    border-radius:999px;
+    padding:7px 12px;
+    background:#fff7e5;
+    color:#3a2a12;
+    font-weight:800;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+  }
+  .phase-step.active {
+    background:#111;
+    color:#f4ca68;
+    box-shadow:0 0 0 4px rgba(201,149,47,.18);
+  }
+  .version-badge {
+    text-align:center;
+    font:700 12px Arial,sans-serif;
+    color:#6b5840;
+    margin-top:8px;
+  }
+  @media (max-width:600px) {
+    .wrap { padding:8px; }
+    .sheet { padding:10px; }
+    h1 { font-size:34px; }
+    .section-title { font-size:24px; }
+    .controls { position:sticky; top:0; z-index:20; background:rgba(255,250,240,.96); padding:8px 0; border-bottom:1px solid #e0b36e; }
+    .controls button, .controls select { min-height:48px; font-size:15px; }
+    .controls button { flex:1 1 45%; }
+    .controls label { flex:1 1 100%; text-align:center; }
+    .rules { gap:8px; }
+    .rule { min-height:0; border-left:0; border-top:1.5px solid #e07a23; padding:10px 4px 4px; }
+    .fate { flex-wrap:wrap; overflow-x:hidden; gap:10px; padding:12px 8px; }
+    .tile, .tile img { width:68px; height:68px; }
+    .tile .name { font-size:9px; bottom:-17px; }
+    .session-grid { grid-template-columns:1fr 1fr; }
+  }
+
+
   @media (max-width:900px) {
     header,.main,.rules,.footer { grid-template-columns:1fr; }
     h1 { font-size:46px; }
@@ -647,104 +687,6 @@
     .score-row { grid-template-columns: 130px 35px 1fr; }
     .mini { width:24px;height:24px; } .mini img { width:24px;height:24px; }
   }
-
-
-/* =========================
-   SevenFall Studio Edition
-   Mobile-first polish layer
-   ========================= */
-:root { --sf-dark:#070706; --sf-gold:#f4ca68; --sf-card:#fff7e5; --sf-green:#2f4c1f; }
-html { scroll-behavior:smooth; }
-body { -webkit-tap-highlight-color: transparent; }
-body.sf-studio-ready .brand-copy h1::after{ content:" Studio"; font-family:Georgia,serif; font-size:.28em; letter-spacing:1px; color:var(--gold); margin-left:8px; vertical-align:middle; }
-.sf-turn-coach{
-  display:none; margin:10px auto 12px; padding:12px 14px; border-radius:18px;
-  background:linear-gradient(135deg,#0b0b0b,#2b1b0c 58%,#7a3d13);
-  color:#fff7e5; box-shadow:0 10px 26px rgba(0,0,0,.22); font-family:Arial,sans-serif;
-  border:2px solid var(--gold); text-align:center;
-}
-.sf-turn-coach .sf-step{font:800 12px Arial,sans-serif; letter-spacing:1.6px; text-transform:uppercase; color:var(--gold);}
-.sf-turn-coach .sf-next{font:800 22px Georgia,serif; margin-top:3px;}
-.sf-turn-coach .sf-hint{font-size:13px; opacity:.92; margin-top:3px;}
-.sf-studio-ready .rules{order:1;}
-.sf-studio-ready .controls{order:2;}
-.sf-studio-ready .session-stats{order:4;}
-#sessionStatsPanel .section-title{font-size:22px;}
-#sessionStatsPanel{margin-top:8px;}
-#lastScorePanel{margin-bottom:8px;}
-.sf-studio-ready .status{order:3;}
-.sf-studio-ready section.panel:first-of-type{display:flex; flex-direction:column;}
-.sf-studio-ready .rules .rule{background:rgba(255,255,255,.66); border:1px solid #e3b77b; border-left:5px solid #c55f16; border-radius:16px; padding:12px; min-height:unset;}
-.sf-studio-ready .rules .rule h3{font-size:19px; display:flex; align-items:center;}
-.sf-action-dock{
-  position:fixed; left:0; right:0; bottom:0; z-index:9998; display:none;
-  padding:10px 10px calc(10px + env(safe-area-inset-bottom));
-  background:linear-gradient(180deg,rgba(7,7,6,.82),rgba(7,7,6,.98));
-  border-top:2px solid var(--sf-gold); box-shadow:0 -12px 32px rgba(0,0,0,.35);
-  backdrop-filter: blur(10px); font-family:Arial,sans-serif;
-}
-.sf-dock-inner{max-width:720px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:8px;}
-.sf-dock-status{display:flex; gap:6px; justify-content:center; flex-wrap:wrap; color:#fff7e5; font-size:12px;}
-.sf-dock-status span{background:rgba(255,255,255,.12); border:1px solid rgba(244,202,104,.45); padding:4px 8px; border-radius:999px;}
-.sf-dock-actions{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;}
-.sf-dock-actions button{width:100%; min-height:48px; border-radius:16px; font-size:13px; padding:10px 8px;}
-.sf-dock-actions button.sf-primary{background:#f4ca68; color:#111; border-color:#f4ca68;}
-.sf-dock-actions button.sf-danger{background:#8b1e1e; color:#fff;}
-.sf-phase-draw #sfDockDraw, .sf-phase-discard #sfDockDiscard, .sf-phase-score #sfDockScore{transform:translateY(-2px); box-shadow:0 0 0 3px rgba(244,202,104,.42),0 0 18px rgba(244,202,104,.28);}
-.sf-phase-draw #drawBtn, .sf-phase-discard #discardBtn, .sf-phase-score #scoreBtn{box-shadow:0 0 0 4px rgba(244,202,104,.35);}
-.tile{touch-action:manipulation;}
-.tile:active{transform:scale(.95)!important;}
-.sf-toast{position:fixed;left:50%;top:18px;z-index:10000;transform:translate(-50%,-130%);background:#111;color:#fff7e5;border:2px solid var(--sf-gold);border-radius:999px;padding:10px 16px;font:800 13px Arial,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.28);transition:.25s ease;pointer-events:none;}
-.sf-toast.show{transform:translate(-50%,0);}
-.sf-score-pop{animation:sfScorePop .5s ease;}
-@keyframes sfScorePop{0%{transform:scale(.96);filter:brightness(1)}50%{transform:scale(1.03);filter:brightness(1.15)}100%{transform:scale(1);filter:brightness(1)}}
-.sf-gameover .modalbox{background:linear-gradient(135deg,#fff7e5,#f7dfae); border-width:4px; box-shadow:0 20px 80px rgba(0,0,0,.45);}
-.sf-gameover #modalTitle{font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif; letter-spacing:2px; font-size:40px; margin:0 0 8px;}
-.sf-confetti{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;}
-.sf-confetti i{position:absolute;top:-20px;width:9px;height:14px;background:var(--sf-gold);animation:sfFall 1.8s linear forwards;}
-@keyframes sfFall{to{transform:translateY(110vh) rotate(720deg); opacity:.95;}}
-.sf-mobile-tabs{display:none;}
-@media (max-width:700px){
-  body{padding-bottom:112px; background:#f7ebd8;}
-  .wrap{padding:0;}
-  .sheet{border:0; box-shadow:none; padding:10px; border-radius:0;}
-  header{gap:8px; padding-bottom:8px;}
-  .brand-area{grid-template-columns:92px 1fr; gap:10px; text-align:left;}
-  .brand-can img{max-height:130px; max-width:90px;}
-  .brand-copy h1{font-size:34px; letter-spacing:1px;}
-  .subtitle{font-size:13px;}
-  .tag{font-size:12px;}
-  .statsline{font-size:11px; gap:4px;}
-  .components{display:none;}
-  .section-title{font-size:24px; margin-bottom:8px;}
-  .sf-turn-coach{display:block;}
-  .rules{grid-template-columns:1fr; gap:8px; margin-bottom:8px;}
-  .rule{font-size:13px; line-height:1.25;}
-  .rule h3{margin-bottom:4px!important;}
-  .rule br{display:none;}
-  .controls{display:grid; grid-template-columns:1fr; gap:8px; margin:8px 0;}
-  .controls label{display:flex; align-items:center; justify-content:space-between; gap:10px; background:#fff9ed; padding:8px 10px; border-radius:14px; border:1px solid #e3b77b;}
-  .controls button,.controls select{width:100%; min-height:48px; font-size:15px; border-radius:16px;}
-  .session-stats{margin-top:8px;}
-  .session-grid{grid-template-columns:1fr 1fr;}
-  .status{gap:5px; margin:6px 0 8px;}
-  .pill{font-size:12px; padding:5px 8px;}
-  .fate{padding:12px 8px 24px; gap:9px; flex-wrap:wrap; overflow-x:hidden; min-height:184px;}
-  .tile,.tile img{width:66px; height:66px;}
-  .tile .name{font-size:8px; bottom:-17px;}
-  .tile.locked::after{bottom:-18px; font-size:8px;}
-  .score-text-row{padding:7px 3px;}
-  .score-text-row span{font-size:12px;}
-  .score-text-row b{font-size:22px;}
-  .footer{display:none;}
-  .log{font-size:13px; min-height:64px;}
-  .sf-action-dock{display:block;}
-  .modal{padding:14px; z-index:10001;}
-  .modalbox{width:100%; max-width:420px; padding:20px 16px;}
-  .modalbox button{width:100%; min-height:48px;}
-}
-@media (max-width:380px){.tile,.tile img{width:59px;height:59px}.sf-dock-actions button{font-size:12px}.brand-copy h1{font-size:30px}}
-
 </style>
 </head>
 <body>
@@ -810,6 +752,13 @@ body.sf-studio-ready .brand-copy h1::after{ content:" Studio"; font-family:Georg
           <button class="danger" id="discardBtn" disabled>Discard Selected</button>
           <button id="scoreBtn" disabled>Score Row</button>
         </div>
+        <div class="phase-indicator" id="phaseIndicator" aria-live="polite">
+          <span class="phase-step" data-phase="draw">1 Draw</span>
+          <span class="phase-step" data-phase="discard">2 Discard</span>
+          <span class="phase-step" data-phase="score">3 Score</span>
+        </div>
+        <div class="version-badge">SevenFall Studio Edition · v1.3 Sprint 1.1</div>
+
 
 <div class="status">
           <div class="pill">Round <b id="round">1</b>/5</div>
@@ -832,14 +781,13 @@ body.sf-studio-ready .brand-copy h1::after{ content:" Studio"; font-family:Georg
         <div class="tile-help"><button type="button" onclick="showTileHelp('Wild')">What does Wild do?</button><button type="button" onclick="showTileHelp('Break')">What does Break do?</button></div>
       </section>
 
-      <section class="panel" id="lastScorePanel">
+      <section class="panel">
         <h2 class="section-title">Last Score</h2>
         <div class="log" id="scoreExplanation">Score your Fate Row to see the result explained here.</div>
       </section>
 
-      <section class="panel" id="sessionStatsPanel">
-        <h2 class="section-title">Session Stats</h2>
         <div class="session-stats" id="sessionStatsBox">
+          <h3>Session Stats</h3>
           <p class="session-copy">Every completed 5-round New Game updates these stats.</p>
           <div class="session-grid">
             <div class="session-stat"><span>Games Played</span><b id="gamesPlayedStat">0</b></div>
@@ -848,7 +796,7 @@ body.sf-studio-ready .brand-copy h1::after{ content:" Studio"; font-family:Georg
             <div class="session-stat"><span>Average</span><b id="averageGameStat">0.0</b></div>
           </div>
         </div>
-      </section>
+
 
       <section class="panel">
         <h2 class="section-title">Players</h2>
@@ -912,7 +860,7 @@ const TILE_IMAGES = {"Sun": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF4AA
    - game_complete with final scores
 
    Before publishing:
-   1) Replace G-71VGQ7H6G4 above with your real GA4 Measurement ID.
+   1) Replace G-XXXXXXXXXX above with your real GA4 Measurement ID.
    2) In GA4, mark final_score, winner_score, player_count, round_score_points, and discards_used as custom dimensions/metrics if you want them visible in reports.
    3) This also keeps a local backup in localStorage under sevenfallAnalyticsEvents for testing.
 */
@@ -963,7 +911,7 @@ function trackSevenFall(eventName, params={}){
 
   saveLocalAnalyticsEvent(eventName, payload);
 
-  if(typeof gtag === 'function' && !String('G-71VGQ7H6G4').includes('XXXXXXXXXX')){
+  if(typeof gtag === 'function' && !String('G-XXXXXXXXXX').includes('XXXXXXXXXX')){
     gtag('event', eventName, payload);
   }
 
@@ -1117,8 +1065,7 @@ function init(dailyMode=false){
   sevenFallDrawCount = 0;
   sevenFallDiscardCount = 0;
   trackSevenFall('game_start', {player_count:pc, daily_mode:!!dailyMode});
-  state={players:Array.from({length:pc},()=>({score:0,rounds:[],discards:0})),round:1,player:0,bag:makeBag(),row:[],discard:[],used:0,selected:new Set(),drawn:false,gameOver:false,animating:false,recentSpecials:new Set(),dailyMode:!!dailyMode, dailySeed:seed, statsRecorded:false, phase:'draw'};
-  window.state=state;
+  state={players:Array.from({length:pc},()=>({score:0,rounds:[],discards:0})),round:1,player:0,bag:makeBag(),row:[],discard:[],used:0,selected:new Set(),drawn:false,phase:'draw',gameOver:false,animating:false,recentSpecials:new Set(),dailyMode:!!dailyMode, dailySeed:seed, statsRecorded:false};
   // scoring table is static text-only now; automatic explanation appears after scoring
   document.getElementById('log').textContent = '';
   render();
@@ -1142,7 +1089,6 @@ function draw7(){
   state.row.forEach((t,i)=>{ if(t.name==='Wild' || t.name==='Break') state.recentSpecials.add(i); });
   state.drawn=true;
   state.phase='discard';
-  window.state=state;
   sevenFallDrawCount += 1;
   trackSevenFall('draw_7', {
     player_number: state.player + 1,
@@ -1153,7 +1099,6 @@ function draw7(){
   });
   log(`Player ${state.player+1}, Round ${state.round}: drew 7 tiles. Match-friendly draw is active: triples should appear occasionally, while the mix remains 2 Wild / 2 Break.`);
   render();
-  if(window.innerWidth<=700){ setTimeout(()=>{ const el=document.getElementById('fateRow'); if(el) el.scrollIntoView({behavior:'smooth', block:'center'}); },90); }
 }
 
 function toggleSelect(index){
@@ -1234,17 +1179,16 @@ function discardSelected(){
       replacement_tiles: drawnNames.join('|')
     });
     state.selected.clear();
+    state.phase='discard';
     state.animating=false;
-    state.phase = state.used>=3 ? 'score' : 'discard';
-    window.state=state;
     log(`Flipped ${removedNames.join(', ')}; revealed ${drawnNames.join(', ')}. Replacement tile(s) are locked.`);
     render();
   },470);
 }
 function scoreHand(){
   if(state.animating) return;
+  if(!state.drawn) return;
   state.phase='score';
-  window.state=state;
   let res=score(state.row);
   let playerNumber = state.player + 1;
   let roundNumber = state.round;
@@ -1283,7 +1227,6 @@ function nextTurn(){
   if(state.player>=state.players.length){ state.player=0; state.round++; }
   if(state.round>5){ finish(); return; }
   state.row=[]; state.discard=[]; state.used=0; state.selected=new Set(); state.recentSpecials=new Set(); state.drawn=false; state.phase='draw'; state.bag=makeBag();
-  window.state=state;
   render();
 }
 
@@ -1345,7 +1288,6 @@ function score(row){
 }
 
 function render(){
-  window.state=state;
   updateSessionStatsDisplay();
   document.getElementById('round').textContent=Math.min(state.round,5);
   document.getElementById('player').textContent=state.player+1;
@@ -1353,10 +1295,15 @@ function render(){
   document.getElementById('selectedCount').textContent=state.selected.size;
   document.getElementById('canCount').textContent=state.bag.length;
   document.getElementById('newGame').disabled = !state.gameOver;
-  document.getElementById('drawBtn').disabled=state.animating || state.drawn || state.gameOver;
-  document.getElementById('discardBtn').disabled=state.animating || !state.drawn || state.selected.size===0 || state.used>=3 || state.gameOver;
-  document.getElementById('scoreBtn').disabled=state.animating || !state.drawn || state.gameOver;
-  document.getElementById('scoreBtn').textContent=(state.drawn && !state.gameOver && state.used<3) ? 'Skip Discard / Score' : 'Score Row';
+  const drawButton=document.getElementById('drawBtn');
+  const discardButton=document.getElementById('discardBtn');
+  const scoreButton=document.getElementById('scoreBtn');
+  drawButton.disabled=state.animating || state.drawn || state.gameOver;
+  discardButton.disabled=state.animating || !state.drawn || state.selected.size===0 || state.used>=3 || state.gameOver;
+  scoreButton.disabled=state.animating || !state.drawn || state.gameOver;
+  discardButton.textContent = state.phase==='discard' ? 'Discard Selected' : 'Discard Selected';
+  scoreButton.textContent = state.phase==='discard' ? 'Skip Discard / Score' : 'Score Row';
+  document.querySelectorAll('.phase-step').forEach(el=>el.classList.toggle('active', el.dataset.phase===(state.phase||'draw')));
   updateDailyPanel();
 
   const fate=document.getElementById('fateRow');
@@ -1649,135 +1596,6 @@ function closeAbout(){document.getElementById('aboutModal').classList.remove('sh
 
 
 
-
-
-<script>
-(function(){
-  'use strict';
-  const VERSION='SevenFall Studio Edition 1.2';
-  document.addEventListener('DOMContentLoaded', bootStudio);
-  function bootStudio(){
-    document.body.classList.add('sf-studio-ready');
-    const howTitle=[...document.querySelectorAll('.section-title')].find(h=>/how to play/i.test(h.textContent));
-    const playPanel=howTitle && howTitle.closest('.panel');
-    if(playPanel){
-      const rules=playPanel.querySelector('.rules');
-      const controls=playPanel.querySelector('.controls');
-      const coach=document.createElement('div');
-      coach.className='sf-turn-coach';
-      coach.innerHTML='<div class="sf-step">Next Step</div><div class="sf-next" id="sfCoachNext">Shake Can</div><div class="sf-hint" id="sfCoachHint">Draw 7 tiles to begin your Fate Row.</div>';
-      howTitle.insertAdjacentElement('afterend', coach);
-      if(rules) coach.insertAdjacentElement('afterend', rules);
-      if(controls) rules ? rules.insertAdjacentElement('afterend', controls) : coach.insertAdjacentElement('afterend', controls);
-    }
-    addDock();
-    addToast();
-    enhanceModal();
-    wrapGameFunctionsWhenReady();
-    updateStudioUI();
-    setInterval(updateStudioUI, 650);
-    if('serviceWorker' in navigator){ navigator.serviceWorker.register('./service-worker.js').catch(()=>{}); }
-  }
-  function addDock(){
-    if(document.getElementById('sfActionDock')) return;
-    const dock=document.createElement('div');
-    dock.id='sfActionDock'; dock.className='sf-action-dock';
-    dock.innerHTML='<div class="sf-dock-inner"><div class="sf-dock-status"><span>Round <b id="sfDockRound">1</b>/5</span><span>Player <b id="sfDockPlayer">1</b></span><span>Discard <b id="sfDockDiscards">0</b>/3</span><span>Selected <b id="sfDockSelected">0</b></span></div><div class="sf-dock-actions"><button id="sfDockDraw" class="sf-primary">Shake Can</button><button id="sfDockDiscard" class="sf-danger">Discard</button><button id="sfDockScore">Skip / Score</button></div></div>';
-    document.body.appendChild(dock);
-    dock.querySelector('#sfDockDraw').onclick=()=>tapOriginal('drawBtn');
-    dock.querySelector('#sfDockDiscard').onclick=()=>tapOriginal('discardBtn');
-    dock.querySelector('#sfDockScore').onclick=()=>tapOriginal('scoreBtn');
-  }
-  function tapOriginal(id){ primeAudio(); const b=document.getElementById(id); if(b && !b.disabled) b.click(); else playSound('bad'); }
-  function addToast(){ const t=document.createElement('div'); t.id='sfToast'; t.className='sf-toast'; document.body.appendChild(t); }
-  function toast(msg){ const t=document.getElementById('sfToast'); if(!t) return; t.textContent=msg; t.classList.add('show'); clearTimeout(t._sf); t._sf=setTimeout(()=>t.classList.remove('show'),1300); }
-  function val(id){ const el=document.getElementById(id); return el?el.textContent:'0'; }
-  function updateStudioUI(){
-    const ids=[['sfDockRound','round'],['sfDockPlayer','player'],['sfDockDiscards','discards'],['sfDockSelected','selectedCount']];
-    ids.forEach(([a,b])=>{ const x=document.getElementById(a), y=document.getElementById(b); if(x&&y)x.textContent=y.textContent; });
-    const draw=document.getElementById('drawBtn'), discard=document.getElementById('discardBtn'), score=document.getElementById('scoreBtn');
-    const dd=document.getElementById('sfDockDraw'), dc=document.getElementById('sfDockDiscard'), ds=document.getElementById('sfDockScore');
-    if(draw&&dd) dd.disabled=draw.disabled; if(discard&&dc) dc.disabled=discard.disabled; if(score&&ds){ ds.disabled=score.disabled; ds.textContent=score.textContent||'Score'; }
-    const next=document.getElementById('sfCoachNext'), hint=document.getElementById('sfCoachHint');
-    document.body.classList.remove('sf-phase-draw','sf-phase-discard','sf-phase-score');
-    const gameState=window.state;
-    const phase=gameState && gameState.phase;
-    const discardWindow=gameState && gameState.drawn && !gameState.gameOver && !gameState.animating && gameState.used<3;
-    if((phase==='draw') || (draw && !draw.disabled)){
-      document.body.classList.add('sf-phase-draw');
-      if(next)next.textContent='1 · Draw';
-      if(hint)hint.textContent='Tap Shake Can to draw 7 tiles.';
-    }
-    else if((phase==='discard') || discardWindow){
-      document.body.classList.add('sf-phase-discard');
-      if(next)next.textContent='2 · Discard';
-      if(hint)hint.textContent='Discard is optional: tap a tile then Discard, or tap Skip Discard / Score.';
-    }
-    else if((phase==='score') || (score && !score.disabled)){
-      document.body.classList.add('sf-phase-score');
-      if(next)next.textContent='3 · Score';
-      if(hint)hint.textContent='Score your Fate Row when you are ready.';
-    }
-    else { if(next)next.textContent='Ready'; if(hint)hint.textContent='Start a new game or wait for the current animation.'; }
-  }
-  // Audio system: no external files, all generated in-browser.
-  let ctx=null;
-  function primeAudio(){ if(!ctx){ const AC=window.AudioContext||window.webkitAudioContext; if(AC) ctx=new AC(); } if(ctx && ctx.state==='suspended') ctx.resume(); }
-  function tone(freq, dur, type='sine', when=0, gain=.08){
-    if(!ctx) return; const t=ctx.currentTime+when; const o=ctx.createOscillator(); const g=ctx.createGain();
-    o.type=type; o.frequency.setValueAtTime(freq,t); g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(gain,t+.015); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
-    o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t+dur+.03);
-  }
-  function noise(dur=.18, when=0, gain=.06){
-    if(!ctx) return; const sr=ctx.sampleRate, len=Math.floor(sr*dur), buf=ctx.createBuffer(1,len,sr), data=buf.getChannelData(0);
-    for(let i=0;i<len;i++) data[i]=(Math.random()*2-1)*(1-i/len);
-    const src=ctx.createBufferSource(); const g=ctx.createGain(); const f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1800; f.Q.value=1.7;
-    g.gain.value=gain; src.buffer=buf; src.connect(f); f.connect(g); g.connect(ctx.destination); src.start(ctx.currentTime+when);
-  }
-  function playSound(name){
-    primeAudio(); if(!ctx) return;
-    if(name==='draw'){ noise(.22,0,.075); tone(180,.12,'square',0,.035); tone(260,.10,'square',.08,.03); }
-    else if(name==='discard'){ noise(.12,0,.045); tone(220,.12,'triangle',0,.035); }
-    else if(name==='score'){ tone(523,.12,'sine',0,.07); tone(659,.14,'sine',.10,.06); tone(784,.18,'sine',.22,.055); }
-    else if(name==='row'){ tone(440,.10,'sine',0,.06); tone(660,.10,'sine',.09,.06); tone(880,.18,'sine',.18,.06); }
-    else if(name==='gameover'){ [392,523,659,784,1046].forEach((f,i)=>tone(f,.22,'triangle',i*.16,.075)); noise(.35,.65,.03); }
-    else if(name==='best'){ [523,659,784,1046,1318].forEach((f,i)=>tone(f,.20,'sine',i*.12,.08)); noise(.8,.15,.04); }
-    else if(name==='bad'){ tone(120,.16,'sawtooth',0,.045); }
-  }
-  function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
-  function wrapGameFunctionsWhenReady(){
-    const tryWrap=()=>{
-      if(typeof window.draw7!=='function'||typeof window.discardSelected!=='function'||typeof window.scoreHand!=='function'||typeof window.finish!=='function'){ setTimeout(tryWrap,250); return; }
-      const origDraw=window.draw7, origDiscard=window.discardSelected, origScore=window.scoreHand, origFinish=window.finish, origRender=window.render;
-      window.draw7=function(){ playSound('draw'); vibrate(18); const r=origDraw.apply(this,arguments); setTimeout(updateStudioUI,80); return r; };
-      window.discardSelected=function(){ playSound('discard'); vibrate([10,30,10]); const r=origDiscard.apply(this,arguments); setTimeout(updateStudioUI,80); return r; };
-      window.scoreHand=function(){ playSound('score'); vibrate(22); const before=window.state&&window.state.players?window.state.players.map(p=>p.score):null; const r=origScore.apply(this,arguments); try{ const box=document.getElementById('scoreExplanation'); if(box){ box.classList.remove('sf-score-pop'); void box.offsetWidth; box.classList.add('sf-score-pop'); } }catch(e){} setTimeout(updateStudioUI,80); return r; };
-      window.finish=function(){
-        const oldStats=safeStats(); const r=origFinish.apply(this,arguments); const newStats=safeStats();
-        const isBest=newStats.bestGame && newStats.bestGame>oldStats.bestGame;
-        setTimeout(()=>{ playSound(isBest?'best':'gameover'); vibrate(isBest?[30,60,30,60,80]:[25,35,60]); showFinalPolish(isBest); },120);
-        return r;
-      };
-      if(typeof origRender==='function') window.render=function(){ const r=origRender.apply(this,arguments); updateStudioUI(); return r; };
-    };
-    tryWrap();
-  }
-  function safeStats(){ try{return window.getSessionStats?window.getSessionStats():{bestGame:0};}catch(e){return {bestGame:0};} }
-  function enhanceModal(){ const m=document.getElementById('modal'); if(m){ const obs=new MutationObserver(()=>{ if(m.classList.contains('show')) updateModalLanguage(); }); obs.observe(m,{attributes:true,attributeFilter:['class']}); } }
-  function updateModalLanguage(){ const title=document.getElementById('modalTitle'); if(title && /game over/i.test(title.textContent)) title.textContent='Final Results'; }
-  function showFinalPolish(isBest){
-    updateModalLanguage(); const modal=document.getElementById('modal'); if(modal) modal.classList.add('sf-gameover');
-    if(isBest){ toast('🏆 New Personal Best!'); confetti(); }
-    else toast('Round 5 Complete');
-  }
-  function confetti(){
-    const wrap=document.createElement('div'); wrap.className='sf-confetti'; document.body.appendChild(wrap);
-    const colors=['#f4ca68','#c55f16','#8b1e1e','#2f4c1f','#fff7e5'];
-    for(let i=0;i<80;i++){ const p=document.createElement('i'); p.style.left=Math.random()*100+'%'; p.style.background=colors[i%colors.length]; p.style.animationDelay=(Math.random()*.5)+'s'; p.style.transform='rotate('+Math.random()*360+'deg)'; wrap.appendChild(p); }
-    setTimeout(()=>wrap.remove(),2500);
-  }
-})();
-</script>
 
 </body>
 </html>
