@@ -743,12 +743,21 @@
     <div>
       <section class="panel">
         <h2 class="section-title">How To Play</h2>
+        <div class="rules">
+          <div class="rule"><h3><span class="num">1</span>Draw</h3>Select <b>Shake Can &amp; Draw 7</b>.<br><br>The can will shake and randomly draw 7 tiles for you.<br><br>These tiles appear face-up as your Fate Row.</div>
+          <div class="rule"><h3><span class="num">2</span>Discard</h3>You may discard up to <b>3 total tiles</b>.<br>Discard one at a time or all at once.<br>Each discarded tile is immediately replaced.</div>
+          <div class="rule"><h3><span class="num">3</span>Score</h3>Replacement tiles are locked and cannot be discarded again this turn.<br>Assign Wilds first, then apply Breaks.<br>Score your final Fate Row.</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2 class="section-title">Play</h2>
         <div class="controls">
           <label>Players:
             <select id="playerCount"><option selected>1</option><option>2</option><option>3</option><option>4</option></select>
           </label>
           <button class="secondary" id="newGame" disabled>New Game</button>
-          <button id="drawBtn">Shake Can & Draw 7</button>
+          <button id="drawBtn">Shake Can &amp; Draw 7</button>
           <button class="danger" id="discardBtn" disabled>Discard Selected</button>
           <button id="scoreBtn" disabled>Score Row</button>
         </div>
@@ -759,22 +768,14 @@
         </div>
         <div class="version-badge">SevenFall Studio Edition · v1.4 Sound + Layout Fix</div>
 
-
-<div class="status">
+        <div class="status">
           <div class="pill">Round <b id="round">1</b>/5</div>
           <div class="pill">Player <b id="player">1</b></div>
           <div class="pill">Discards <b id="discards">0</b>/3</div>
           <div class="pill">Selected <b id="selectedCount">0</b></div>
           <div class="pill">Tiles in Can <b id="canCount">40</b></div>
         </div>
-        <div class="rules">
-          <div class="rule"><h3><span class="num">1</span>Draw</h3>Select <b>Shake Can &amp; Draw 7</b>.<br><br>The can will shake and randomly draw 7 tiles for you.<br><br>These tiles appear face-up as your Fate Row.</div>
-          <div class="rule"><h3><span class="num">2</span>Discard</h3>You may discard up to <b>3 total tiles</b>.<br>Discard one at a time or all at once.<br>Each discarded tile is immediately replaced.</div>
-          <div class="rule"><h3><span class="num">3</span>Score</h3>Replacement tiles are locked and cannot be discarded again this turn.<br>Assign Wilds first, then apply Breaks.<br>Score your final Fate Row.</div>
-        </div>
-      </section>
 
-      <section class="panel">
         <h2 class="section-title">Fate Row</h2>
         <p class="tiny" style="text-align:center;margin-top:-6px">Click multiple eligible tiles to select them. Click again to unselect.</p>
         <div class="fate" id="fateRow"></div>
@@ -826,7 +827,6 @@
           <div class="score-text-row"><span>ONE PAIR</span><b>1</b></div>
           <div class="score-text-row"><span>NO SCORE</span><b>0</b></div>
         </div>
-      </div>
         <p class="tiny" style="text-align:center"><b>Wilds are assigned first.</b> <b>Breaks are applied afterward</b> and reduce the highest-scoring combination by one matching tile.<br>Score only the single highest matching listed category.</p>
       </section>
     </div>
