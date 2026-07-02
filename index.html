@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SevenFall Studio Edition v1.6 Layout Polish</title>
+<title>SevenFall Studio Edition v1.7 Flow Polish</title>
 <!-- SevenFall Analytics: replace G-71VGQ7H6G4 with your Google Analytics 4 Measurement ID before publishing. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-71VGQ7H6G4"></script>
 <script>
@@ -895,20 +895,13 @@
             <select id="playerCount"><option selected>1</option><option>2</option><option>3</option><option>4</option></select>
           </label>
           <button class="secondary" id="newGame" disabled>New Game</button>
-          <button class="secondary" id="soundBtn" type="button">Sound On</button>
+          <button class="secondary" id="soundBtn" type="button">Sound: On</button>
           <button id="drawBtn">Shake Can &amp; Draw 7</button>
           <button class="danger" id="discardBtn" disabled>Discard Selected</button>
           <button id="scoreBtn" disabled>Score Row</button>
         </div>
-        <div class="version-badge">SevenFall Studio Edition · v1.6 Layout Polish</div>
+        <div class="version-badge">SevenFall Studio Edition · v1.7 Flow Polish</div>
       </section>
-
-      <section class="panel last-score-panel">
-        <h2 class="section-title">Last Score</h2>
-        <div class="log" id="scoreExplanation">Last score will appear here after you score a round.</div>
-      </section>
-
-
 
       <section class="panel">
         <h2 class="section-title">Players</h2>
@@ -924,6 +917,10 @@
                     <div class="session-stat"><span>Average</span><b id="averageGameStat">0.0</b></div>
                   </div>
                 </div>
+        <section class="panel last-score-panel" aria-label="Last Score">
+          <h2 class="section-title">Last Score</h2>
+          <div class="log" id="scoreExplanation">Last score will appear here after you score a round.</div>
+        </section>
         <div class="log round-log-hidden" id="log" aria-hidden="true"></div>
       </section>
 
@@ -1195,23 +1192,29 @@ let sevenFallAudioContext = null;
 let sevenFallSoundOn = localStorage.getItem('sevenfallSoundOn') !== 'false';
 function updateSoundButton(){
   const btn = document.getElementById('soundBtn');
-  if(btn) btn.textContent = sevenFallSoundOn ? 'Sound On' : 'Sound Off';
-}
-function toggleSevenFallSound(){
-  sevenFallSoundOn = !sevenFallSoundOn;
-  localStorage.setItem('sevenfallSoundOn', sevenFallSoundOn ? 'true' : 'false');
-  updateSoundButton();
-  if(sevenFallSoundOn) playSfx('select');
+  if(btn) btn.textContent = sevenFallSoundOn ? 'Sound: On' : 'Sound: Off';
+  if(btn) btn.setAttribute('aria-pressed', sevenFallSoundOn ? 'true' : 'false');
 }
 function getSevenFallAudio(){
   const AudioCtx = window.AudioContext || window.webkitAudioContext;
   if(!AudioCtx) return null;
   if(!sevenFallAudioContext) sevenFallAudioContext = new AudioCtx();
-  if(sevenFallAudioContext.state === 'suspended') sevenFallAudioContext.resume().catch(()=>{});
   return sevenFallAudioContext;
 }
-function tone(freq, start, duration, type='sine', gainValue=0.045){
+function unlockSevenFallAudio(){
   const ctx = getSevenFallAudio();
+  if(ctx && ctx.state === 'suspended') ctx.resume().catch(()=>{});
+  return ctx;
+}
+function toggleSevenFallSound(){
+  sevenFallSoundOn = !sevenFallSoundOn;
+  localStorage.setItem('sevenfallSoundOn', sevenFallSoundOn ? 'true' : 'false');
+  updateSoundButton();
+  unlockSevenFallAudio();
+  if(sevenFallSoundOn) setTimeout(()=>playSfx('select'), 40);
+}
+function tone(freq, start, duration, type='sine', gainValue=0.045){
+  const ctx = unlockSevenFallAudio();
   if(!ctx) return;
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
@@ -1225,6 +1228,14 @@ function tone(freq, start, duration, type='sine', gainValue=0.045){
   osc.start(ctx.currentTime + start);
   osc.stop(ctx.currentTime + start + duration + 0.025);
 }
+let sevenFallAudioPrimed = false;
+function primeSevenFallAudio(){
+  if(sevenFallAudioPrimed) return;
+  sevenFallAudioPrimed = true;
+  unlockSevenFallAudio();
+}
+document.addEventListener('pointerdown', primeSevenFallAudio, {once:true, passive:true});
+document.addEventListener('touchstart', primeSevenFallAudio, {once:true, passive:true});
 function playSfx(name){
   if(!sevenFallSoundOn) return;
   try{
