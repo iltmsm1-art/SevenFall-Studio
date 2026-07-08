@@ -1,8 +1,39 @@
-SevenFall Studio Edition v1.1
+7FALL™ Deployment Notes
 
-Fixes:
-- Moves Session Stats below Last Score so Fate Row stays closer to play buttons on phones.
-- After Shake Can, the coach/dock now goes to Discard first, even if no tile has been selected yet. Players can still Skip / Score if they choose not to discard.
-- Service worker cache bumped to force phone update.
+Live Website
+https://iltmsm1-art.github.io/SevenFall-Studio/
 
-Deploy: upload the unzipped folder contents to the same Netlify site.
+Project
+7FALL™
+Shake the Can. Reveal Your Fate.
+
+Deployment Checklist
+
+✓ index.html updated
+✓ manifest.webmanifest updated
+✓ service-worker.js current
+✓ icons folder updated
+✓ android-192.png
+✓ android-512.png
+✓ apple-touch-icon.png
+✓ favicon-16x16.png
+✓ favicon-32x32.png
+
+Before Publishing
+
+• Verify all branding displays as 7FALL™
+• Clear browser cache and perform a hard refresh (Ctrl+F5)
+• Test desktop browser
+• Test mobile browser
+• Test installed Progressive Web App (PWA)
+• Verify manifest loads correctly
+• Verify service worker updates properly
+
+Repository
+https://github.com/iltmsm1-art/SevenFall-Studio
+
+Created by
+Anthony Mays
+Tampa Bay, Florida
+
+© 2026 7FALL™. All Rights Reserved.
