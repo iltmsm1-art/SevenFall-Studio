@@ -1917,7 +1917,7 @@ async function shareMyFate(){
   if(navigator.share && window.isSecureContext){
     try {
       await navigator.share({
-        title:'7FALL™ — Share My Fate',
+        title:'I just revealed my Fate in 7FALL™',
         text:latestFateShare.message,
         url:SEVENFALL_SHARE_URL
       });
@@ -1998,15 +1998,25 @@ function finish(){
     ? `You completed five rounds with ${max} points. New Game is now unlocked.`
     : `${winnerLabel} ${winners.length === 1 ? 'wins' : 'share the victory'} with ${max} points. New Game is now unlocked.`;
   const shareLead = state.players.length === 1
-    ? `I became ${fate.title} with ${max} points in 7FALL™!`
-    : `${winnerLabel} earned the title ${fate.title} with ${max} points in 7FALL™!`;
+    ? `My Fate has been revealed...`
+    : `${winnerLabel}'s Fate has been revealed...`;
+  const shareResult = state.players.length === 1
+    ? `Final Score: ${max}`
+    : `Winning Score: ${max}`;
 
   latestFateShare = {
     score:max,
     title:fate.title,
+    flavor:fate.flavor,
     message:`${shareLead}
 
-Think your Fate will be better?`
+7FALL™
+${shareResult}
+Fate: ${fate.title}
+
+“${fate.flavor}”
+
+Can you beat my Fate?`
   };
 
   document.getElementById('fateResultTitle').textContent=fate.title;
